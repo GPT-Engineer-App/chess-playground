@@ -20,10 +20,7 @@ const initialPositions = {
     { type: "n", color: "w" },
     { type: "n", color: "w" },
   ],
-  b: [
-    { type: "b", color: "w" },
-    { type: "b", color: "w" },
-  ],
+  // Bishops removed from initial positions
   q: [{ type: "q", color: "w" }],
   k: [{ type: "k", color: "w" }],
 };
