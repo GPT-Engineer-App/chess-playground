@@ -11,18 +11,29 @@ const boardSize = 8; // 8x8 chess board
 
 // Helper function to create an initial board state
 const initialPositions = {
-  p: [],
-  r: [],
-  n: [],
-  q: [],
-  k: [],
+  p: ["a2", "b2", "c2", "d2", "e2", "f2", "g2", "h2", "a7", "b7", "c7", "d7", "e7", "f7", "g7", "h7"],
+  r: ["a1", "h1", "a8", "h8"],
+  n: ["b1", "g1", "b8", "g8"],
+  b: ["c1", "f1", "c8", "f8"],
+  q: ["d1", "d8"],
+  k: ["e1", "e8"],
 };
 
 const createInitialBoard = () => {
-  // Create an empty 8x8 board
-  return Array(boardSize)
+  const board = Array(boardSize)
     .fill(null)
     .map(() => Array(boardSize).fill(null));
+
+  for (const [piece, positions] of Object.entries(initialPositions)) {
+    const pieceType = piece.toLowerCase();
+    for (const pos of positions) {
+      const x = pos.charCodeAt(0) - "a".charCodeAt(0);
+      const y = boardSize - parseInt(pos[1], 10);
+      board[y][x] = { type: pieceType, color: y < boardSize / 2 ? "w" : "b" };
+    }
+  }
+
+  return board;
 };
 
 const Index = () => {
