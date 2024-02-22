@@ -10,20 +10,59 @@ const ChessPiece = ({ piece }) => {
 const boardSize = 8; // 8x8 chess board
 
 // Helper function to create an initial board state
+const initialPositions = {
+  p: Array(8).fill({ type: "p", color: "w" }),
+  r: [
+    { type: "r", color: "w" },
+    { type: "r", color: "w" },
+  ],
+  n: [
+    { type: "n", color: "w" },
+    { type: "n", color: "w" },
+  ],
+  b: [
+    { type: "b", color: "w" },
+    { type: "b", color: "w" },
+  ],
+  q: [{ type: "q", color: "w" }],
+  k: [{ type: "k", color: "w" }],
+};
+
 const createInitialBoard = () => {
-  const board = [];
-  for (let i = 0; i < boardSize; i++) {
-    const row = [];
-    for (let j = 0; j < boardSize; j++) {
-      row.push(null); // Replace with actual chess pieces
+  const board = Array(boardSize)
+    .fill(null)
+    .map(() => Array(boardSize).fill(null));
+
+  board[1] = [...initialPositions.p];
+  board[0][0] = board[0][7] = initialPositions.r[0];
+  board[0][1] = board[0][6] = initialPositions.n[0];
+  board[0][2] = board[0][5] = initialPositions.b[0];
+  board[0][3] = initialPositions.q[0];
+  board[0][4] = initialPositions.k[0];
+
+  // Set up black pieces by mirroring white
+  for (let i = 0; i < 8; i++) {
+    if (board[0][i]) {
+      board[7][i] = { ...board[0][i], color: "b" };
     }
-    board.push(row);
+    if (board[1][i]) {
+      board[6][i] = { ...board[1][i], color: "b" };
+    }
   }
+
   return board;
 };
 
 const Index = () => {
   const [board, setBoard] = useState(createInitialBoard());
+
+  const movePiece = (fromRow, fromCol, toRow, toCol) => {
+    const newBoard = [...board];
+    const pieceToMove = newBoard[fromRow][fromCol];
+    newBoard[fromRow][fromCol] = null;
+    newBoard[toRow][toCol] = pieceToMove;
+    setBoard(newBoard);
+  };
   const lightSquareColor = useColorModeValue("gray.200", "gray.600");
   const darkSquareColor = useColorModeValue("gray.500", "gray.800");
 
