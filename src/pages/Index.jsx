@@ -34,11 +34,19 @@ const createInitialBoard = () => {
     .map(() => Array(boardSize).fill(null));
 
   board[1] = [...initialPositions.p];
+  // Place white pieces
   board[0][0] = board[0][7] = initialPositions.r[0];
   board[0][1] = board[0][6] = initialPositions.n[0];
   board[0][2] = board[0][5] = initialPositions.b[0];
   board[0][3] = initialPositions.q[0];
   board[0][4] = initialPositions.k[0];
+  // Place black pieces
+  for (let i = 0; i < boardSize; i++) {
+    if (board[0][i]) {
+      board[7][i] = { ...board[0][i], color: "b" };
+    }
+  }
+  board[6] = initialPositions.p.map((piece) => ({ ...piece, color: "b" }));
 
   // Set up black pieces by mirroring white
   for (let i = 0; i < 8; i++) {
