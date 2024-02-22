@@ -11,18 +11,11 @@ const boardSize = 8; // 8x8 chess board
 
 // Helper function to create an initial board state
 const initialPositions = {
-  p: Array(8).fill({ type: "p", color: "w" }),
-  r: [
-    { type: "r", color: "w" },
-    { type: "r", color: "w" },
-  ],
-  n: [
-    { type: "n", color: "w" },
-    { type: "n", color: "w" },
-  ],
-  // Bishops removed from initial positions
-  q: [{ type: "q", color: "w" }],
-  k: [{ type: "k", color: "w" }],
+  p: [],
+  r: [],
+  n: [],
+  q: [],
+  k: [],
 };
 
 const createInitialBoard = () => {
