@@ -48,12 +48,23 @@ const Index = () => {
   const lightSquareColor = useColorModeValue("gray.200", "gray.600");
   const darkSquareColor = useColorModeValue("gray.500", "gray.800");
 
+  const renderSquare = (piece, rowIndex, colIndex) => {
+    const bg = (rowIndex + colIndex) % 2 === 0 ? lightSquareColor : darkSquareColor;
+    return (
+      <GridItem key={`${rowIndex}-${colIndex}`} bg={bg} w="50px" h="50px">
+        <ChessPiece piece={piece} />
+      </GridItem>
+    );
+  };
+
   return (
     <VStack p={4}>
       <Text fontSize="2xl" fontWeight="bold">
         Chess Game
       </Text>
-      {/* Board image has been removed as per request */}
+      <Grid templateColumns={`repeat(${boardSize}, 50px)`} gap={0}>
+        {board.map((row, rowIndex) => row.map((piece, colIndex) => renderSquare(piece, rowIndex, colIndex)))}
+      </Grid>
     </VStack>
   );
 };
