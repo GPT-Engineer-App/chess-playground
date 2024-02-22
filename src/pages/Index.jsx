@@ -3,8 +3,8 @@ import { Box, Grid, GridItem, useColorModeValue, VStack, Text, Center, Icon } fr
 import { FaChessPawn } from "react-icons/fa";
 
 const ChessPiece = ({ piece }) => {
-  // For now, we'll use a pawn icon as a placeholder for all pieces
-  return <Icon as={FaChessPawn} />;
+  // Returning null if there is no piece, removing the placeholder
+  return piece ? <Icon as={FaChessPawn} /> : null;
 };
 
 const boardSize = 8; // 8x8 chess board
