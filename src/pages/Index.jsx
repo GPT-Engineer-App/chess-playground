@@ -1,5 +1,11 @@
 import React, { useState } from "react";
-import { Box, Grid, GridItem, useColorModeValue, VStack, Text, Center } from "@chakra-ui/react";
+import { Box, Grid, GridItem, useColorModeValue, VStack, Text, Center, Icon } from "@chakra-ui/react";
+import { FaChessPawn } from "react-icons/fa";
+
+const ChessPiece = ({ piece }) => {
+  // For now, we'll use a pawn icon as a placeholder for all pieces
+  return <Icon as={FaChessPawn} />;
+};
 
 const boardSize = 8; // 8x8 chess board
 
@@ -31,7 +37,7 @@ const Index = () => {
           {board.map((row, rowIndex) =>
             row.map((cell, columnIndex) => (
               <GridItem w="50px" h="50px" bg={(rowIndex + columnIndex) % 2 === 0 ? lightSquareColor : darkSquareColor} key={`${rowIndex}-${columnIndex}`}>
-                {/* TODO: Render chess piece */}
+                <ChessPiece piece={cell} />
               </GridItem>
             )),
           )}
