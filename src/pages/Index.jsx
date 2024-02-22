@@ -53,17 +53,7 @@ const Index = () => {
       <Text fontSize="2xl" fontWeight="bold">
         Chess Game
       </Text>
-      <Center>
-        <Grid templateColumns={`repeat(${boardSize}, 1fr)`} gap={0}>
-          {board.map((row, rowIndex) =>
-            row.map((cell, columnIndex) => (
-              <GridItem w="50px" h="50px" bg={(rowIndex + columnIndex) % 2 === 0 ? lightSquareColor : darkSquareColor} key={`${rowIndex}-${columnIndex}`}>
-                <ChessPiece piece={cell} />
-              </GridItem>
-            )),
-          )}
-        </Grid>
-      </Center>
+      {/* Board image has been removed as per request */}
     </VStack>
   );
 };
