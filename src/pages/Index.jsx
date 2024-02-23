@@ -58,6 +58,7 @@ const createInitialBoard = () => {
 const Index = () => {
   const [board, setBoard] = useState(createInitialBoard());
   const [selectedPiece, setSelectedPiece] = useState(null);
+  const [currentTurn, setCurrentTurn] = useState("w");
 
   const movePiece = (fromRow, fromCol, toRow, toCol) => {
     const newBoard = [...board];
@@ -70,10 +71,11 @@ const Index = () => {
   const darkSquareColor = useColorModeValue("gray.500", "gray.800");
 
   const handleSquareClick = (rowIndex, colIndex) => {
-    if (selectedPiece) {
+    if (selectedPiece && board[rowIndex][colIndex] && board[rowIndex][colIndex].color === currentTurn) {
       movePiece(selectedPiece.row, selectedPiece.col, rowIndex, colIndex);
       setSelectedPiece(null); // Deselect after move
-    } else if (board[rowIndex][colIndex]) {
+      setCurrentTurn(currentTurn === "w" ? "b" : "w"); // Switch turns
+    } else if (board[rowIndex][colIndex] && board[rowIndex][colIndex].color === currentTurn) {
       setSelectedPiece({ row: rowIndex, col: colIndex });
     }
   };
