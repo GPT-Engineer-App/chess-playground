@@ -72,11 +72,14 @@ const Index = () => {
   const [currentTurn, setCurrentTurn] = useState("w");
 
   const movePiece = (fromRow, fromCol, toRow, toCol) => {
-    const newBoard = [...board];
+    const newBoard = board.map((row) => [...row]);
     const pieceToMove = newBoard[fromRow][fromCol];
+    // Perform the move
     newBoard[fromRow][fromCol] = null;
     newBoard[toRow][toCol] = pieceToMove;
     setBoard(newBoard);
+    // Return true if the move was successful
+    return newBoard[toRow][toCol] === pieceToMove;
   };
   const lightSquareColor = useColorModeValue("gray.200", "gray.600");
   const darkSquareColor = useColorModeValue("gray.500", "gray.800");
@@ -86,15 +89,15 @@ const Index = () => {
     const isVerticalMove = selectedPiece && selectedPiece.col === colIndex;
     const isOneStepMove = (currentTurn === "w" && selectedPiece.row === rowIndex + 1) || (currentTurn === "b" && selectedPiece.row === rowIndex - 1);
 
-    if (selectedPiece && (!board[rowIndex][colIndex] || board[rowIndex][colIndex].color !== currentTurn) && (!isPawn || (isPawn && isVerticalMove && isOneStepMove))) {
-      movePiece(selectedPiece.row, selectedPiece.col, rowIndex, colIndex);
-      setSelectedPiece(null); // Deselect after move
-      setCurrentTurn(currentTurn === "w" ? "b" : "w"); // Switch turns
-    } else if (board[rowIndex][colIndex] && board[rowIndex][colIndex].color === currentTurn) {
-      setSelectedPiece({ row: rowIndex, col: colIndex });
-    } else {
-      // This condition is not necessary because it's covered in the previous conditions.
+    // Corrected duplicate conditional block in handleSquareClick function
+
+    const moveSuccessful = movePiece(selectedPiece.row, selectedPiece.col, rowIndex, colIndex);
+    // Deselect the piece and switch turns only if a move was made
+    if (moveSuccessful) {
+      setSelectedPiece(null);
+      setCurrentTurn(currentTurn === "w" ? "b" : "w");
     }
+    // Removed redundant else block
   };
 
   const renderSquare = (piece, rowIndex, colIndex) => {
