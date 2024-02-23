@@ -82,7 +82,7 @@ const Index = () => {
   const darkSquareColor = useColorModeValue("gray.500", "gray.800");
 
   const handleSquareClick = (rowIndex, colIndex) => {
-    if (selectedPiece && board[rowIndex][colIndex] && board[rowIndex][colIndex].color === currentTurn) {
+    if (selectedPiece && (!board[rowIndex][colIndex] || board[rowIndex][colIndex].color !== currentTurn)) {
       movePiece(selectedPiece.row, selectedPiece.col, rowIndex, colIndex);
       setSelectedPiece(null); // Deselect after move
       setCurrentTurn(currentTurn === "w" ? "b" : "w"); // Switch turns
