@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Flex, Grid, GridItem, useColorModeValue, VStack, Text } from "@chakra-ui/react";
+import { Flex, Grid, GridItem, useColorModeValue, VStack, Text, HStack } from "@chakra-ui/react";
 import { FaChessPawn, FaChessRook, FaChessKnight, FaChessBishop, FaChessQueen, FaChessKing } from "react-icons/fa";
 
 const ChessPiece = ({ piece }) => {
@@ -55,6 +55,17 @@ const createInitialBoard = () => {
   return board;
 };
 
+const CurrentTurnIndicator = ({ turn }) => {
+  return (
+    <HStack>
+      <Text fontSize="md" fontWeight="bold">
+        {turn === "w" ? "White's turn" : "Black's turn"}
+      </Text>
+      <FaChessKing color={turn === "w" ? "white" : "black"} />
+    </HStack>
+  );
+};
+
 const Index = () => {
   const [board, setBoard] = useState(createInitialBoard());
   const [selectedPiece, setSelectedPiece] = useState(null);
@@ -91,7 +102,8 @@ const Index = () => {
   };
 
   return (
-    <VStack p={4}>
+    <VStack p={4} spacing={4}>
+      <CurrentTurnIndicator turn={currentTurn} />
       <Text fontSize="2xl" fontWeight="bold">
         Chess Game
       </Text>
