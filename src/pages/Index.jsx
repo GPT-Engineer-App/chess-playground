@@ -1,10 +1,25 @@
 import React, { useState } from "react";
 import { Box, Grid, GridItem, useColorModeValue, VStack, Text, Center, Icon } from "@chakra-ui/react";
-import { FaChessPawn } from "react-icons/fa";
+import { FaChessPawn, FaChessRook, FaChessKnight, FaChessBishop, FaChessQueen, FaChessKing } from "react-icons/fa";
 
 const ChessPiece = ({ piece }) => {
-  // Returning null if there is no piece, removing the placeholder
-  return piece ? <Icon as={FaChessPawn} /> : null;
+  if (!piece) {
+    return null;
+  }
+
+  const { type, color } = piece;
+  const pieceColor = color === "w" ? "white" : "black";
+
+  const icons = {
+    p: <FaChessPawn color={pieceColor} />,
+    r: <FaChessRook color={pieceColor} />,
+    n: <FaChessKnight color={pieceColor} />,
+    b: <FaChessBishop color={pieceColor} />,
+    q: <FaChessQueen color={pieceColor} />,
+    k: <FaChessKing color={pieceColor} />,
+  };
+
+  return icons[type.toLowerCase()];
 };
 
 const boardSize = 8; // 8x8 chess board
