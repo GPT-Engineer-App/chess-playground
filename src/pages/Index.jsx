@@ -42,7 +42,7 @@ const createInitialBoard = () => {
   for (const [piece, positions] of Object.entries(initialPositions)) {
     const pieceType = piece.toLowerCase();
     for (const pos of positions) {
-      const x = pos.charCodeAt(0) - "a".charCodeAt(0);
+      const x = boardSize - 1 - (pos.charCodeAt(0) - "a".charCodeAt(0));
       const y = boardSize - parseInt(pos[1], 10);
       board[y][x] = { type: pieceType, color: y < boardSize / 2 ? "w" : "b" };
     }
