@@ -44,7 +44,7 @@ const createInitialBoard = () => {
     for (const pos of positions) {
       const x = boardSize - 1 - (pos.charCodeAt(0) - "a".charCodeAt(0));
       const y = boardSize - parseInt(pos[1], 10);
-      board[y][x] = { type: pieceType, color: y < boardSize / 2 ? "w" : "b" };
+      board[y][x] = { type: pieceType, color: y >= boardSize / 2 ? "w" : "b" };
     }
   }
 
