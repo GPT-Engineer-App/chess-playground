@@ -99,7 +99,7 @@ const Index = () => {
 
   const renderSquare = (piece, rowIndex, colIndex) => {
     const isSelected = selectedPiece && selectedPiece.row === rowIndex && selectedPiece.col === colIndex;
-    const bg = isSelected ? "blue.200" : (rowIndex + colIndex) % 2 === 0 ? lightSquareColor : darkSquareColor;
+    const bg = isSelected ? "blue.500" : (rowIndex + colIndex) % 2 === 0 ? lightSquareColor : darkSquareColor;
     return (
       <GridItem key={`${rowIndex}-${colIndex}`} bg={bg} w="50px" h="50px" onClick={() => handleSquareClick(rowIndex, colIndex)}>
         <ChessPiece piece={piece} isSelected={isSelected} />
