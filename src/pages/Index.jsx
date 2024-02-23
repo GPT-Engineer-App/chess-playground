@@ -82,7 +82,11 @@ const Index = () => {
   const darkSquareColor = useColorModeValue("gray.500", "gray.800");
 
   const handleSquareClick = (rowIndex, colIndex) => {
-    if (selectedPiece && (!board[rowIndex][colIndex] || board[rowIndex][colIndex].color !== currentTurn)) {
+    const isPawn = selectedPiece && board[selectedPiece.row][selectedPiece.col].type === "p";
+    const isVerticalMove = selectedPiece && selectedPiece.col === colIndex;
+    const isOneStepMove = (currentTurn === "w" && selectedPiece.row === rowIndex + 1) || (currentTurn === "b" && selectedPiece.row === rowIndex - 1);
+
+    if (selectedPiece && (!board[rowIndex][colIndex] || board[rowIndex][colIndex].color !== currentTurn) && (!isPawn || (isPawn && isVerticalMove && isOneStepMove))) {
       movePiece(selectedPiece.row, selectedPiece.col, rowIndex, colIndex);
       setSelectedPiece(null); // Deselect after move
       setCurrentTurn(currentTurn === "w" ? "b" : "w"); // Switch turns
