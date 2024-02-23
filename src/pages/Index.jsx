@@ -11,12 +11,12 @@ const ChessPiece = ({ piece }) => {
   const pieceColor = color === "w" ? "white" : "black";
 
   const icons = {
-    p: <FaChessPawn color={pieceColor} size="2em" />,
-    r: <FaChessRook color={pieceColor} size="2em" />,
-    n: <FaChessKnight color={pieceColor} size="2em" />,
-    b: <FaChessBishop color={pieceColor} size="2em" />,
-    q: <FaChessQueen color={pieceColor} size="2em" />,
-    k: <FaChessKing color={pieceColor} size="2em" />,
+    p: <FaChessPawn color={pieceColor} size="2em" pointerEvents="none" />,
+    r: <FaChessRook color={pieceColor} size="2em" pointerEvents="none" />,
+    n: <FaChessKnight color={pieceColor} size="2em" pointerEvents="none" />,
+    b: <FaChessBishop color={pieceColor} size="2em" pointerEvents="none" />,
+    q: <FaChessQueen color={pieceColor} size="2em" pointerEvents="none" />,
+    k: <FaChessKing color={pieceColor} size="2em" pointerEvents="none" />,
   };
 
   return (
