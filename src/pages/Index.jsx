@@ -93,10 +93,7 @@ const Index = () => {
     } else if (board[rowIndex][colIndex] && board[rowIndex][colIndex].color === currentTurn) {
       setSelectedPiece({ row: rowIndex, col: colIndex });
     } else {
-      // setSelectedPiece(null); // Commenting out deselection on empty squares or squares with an opponent's pieces
-      if (!board[rowIndex][colIndex] || board[rowIndex][colIndex].color === currentTurn) {
-        setSelectedPiece({ row: rowIndex, col: colIndex });
-      }
+      // This condition is not necessary because it's covered in the previous conditions.
     }
   };
 
@@ -104,7 +101,7 @@ const Index = () => {
     const isSelected = selectedPiece && selectedPiece.row === rowIndex && selectedPiece.col === colIndex;
     const bg = isSelected ? "blue.500" : (rowIndex + colIndex) % 2 === 0 ? lightSquareColor : darkSquareColor;
     return (
-      <GridItem key={`${rowIndex}-${colIndex}`} bg={bg} w="50px" h="50px" onClick={() => handleSquareClick(rowIndex, colIndex)}>
+      <GridItem key={`${rowIndex}-${colIndex}`} bg={bg} w="50px" h="50px" _hover={{ bg: "blue.300", cursor: "pointer" }} onClick={() => handleSquareClick(rowIndex, colIndex)}>
         <ChessPiece piece={piece} isSelected={isSelected} />
       </GridItem>
     );
