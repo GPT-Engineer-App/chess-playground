@@ -53,6 +53,7 @@ const createInitialBoard = () => {
 
 const Index = () => {
   const [board, setBoard] = useState(createInitialBoard());
+  const [selectedPiece, setSelectedPiece] = useState(null);
 
   const movePiece = (fromRow, fromCol, toRow, toCol) => {
     const newBoard = [...board];
@@ -64,11 +65,21 @@ const Index = () => {
   const lightSquareColor = useColorModeValue("gray.200", "gray.600");
   const darkSquareColor = useColorModeValue("gray.500", "gray.800");
 
+  const handleSquareClick = (rowIndex, colIndex) => {
+    if (selectedPiece) {
+      movePiece(selectedPiece.row, selectedPiece.col, rowIndex, colIndex);
+      setSelectedPiece(null); // Deselect after move
+    } else if (board[rowIndex][colIndex]) {
+      setSelectedPiece({ row: rowIndex, col: colIndex });
+    }
+  };
+
   const renderSquare = (piece, rowIndex, colIndex) => {
-    const bg = (rowIndex + colIndex) % 2 === 0 ? lightSquareColor : darkSquareColor;
+    const isSelected = selectedPiece && selectedPiece.row === rowIndex && selectedPiece.col === colIndex;
+    const bg = isSelected ? "blue.200" : (rowIndex + colIndex) % 2 === 0 ? lightSquareColor : darkSquareColor;
     return (
-      <GridItem key={`${rowIndex}-${colIndex}`} bg={bg} w="50px" h="50px">
-        <ChessPiece piece={piece} />
+      <GridItem key={`${rowIndex}-${colIndex}`} bg={bg} w="50px" h="50px" onClick={() => handleSquareClick(rowIndex, colIndex)}>
+        <ChessPiece piece={piece} isSelected={isSelected} />
       </GridItem>
     );
   };
