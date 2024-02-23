@@ -93,7 +93,10 @@ const Index = () => {
     } else if (board[rowIndex][colIndex] && board[rowIndex][colIndex].color === currentTurn) {
       setSelectedPiece({ row: rowIndex, col: colIndex });
     } else {
-      setSelectedPiece(null); // Deselect when clicking on an empty square or a square with an opponent's piece
+      // setSelectedPiece(null); // Commenting out deselection on empty squares or squares with an opponent's pieces
+      if (!board[rowIndex][colIndex] || board[rowIndex][colIndex].color === currentTurn) {
+        setSelectedPiece({ row: rowIndex, col: colIndex });
+      }
     }
   };
 
