@@ -90,7 +90,7 @@ const Index = () => {
       movePiece(selectedPiece.row, selectedPiece.col, rowIndex, colIndex);
       setSelectedPiece(null); // Deselect after move
       setCurrentTurn(currentTurn === "w" ? "b" : "w"); // Switch turns
-    } else if (board[rowIndex][colIndex] && board[rowIndex][colIndex].color === (currentTurn === "w" ? "white" : "black")) {
+    } else if (board[rowIndex][colIndex] && board[rowIndex][colIndex].color === currentTurn) {
       setSelectedPiece({ row: rowIndex, col: colIndex });
     } else {
       setSelectedPiece(null); // Deselect when clicking on an empty square or a square with an opponent's piece
