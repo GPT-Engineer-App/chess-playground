@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Box, Grid, GridItem, useColorModeValue, VStack, Text, Center, Icon } from "@chakra-ui/react";
+import { Flex, Grid, GridItem, useColorModeValue, VStack, Text } from "@chakra-ui/react";
 import { FaChessPawn, FaChessRook, FaChessKnight, FaChessBishop, FaChessQueen, FaChessKing } from "react-icons/fa";
 
 const ChessPiece = ({ piece }) => {
@@ -19,7 +19,11 @@ const ChessPiece = ({ piece }) => {
     k: <FaChessKing color={pieceColor} size="2em" />,
   };
 
-  return icons[type.toLowerCase()];
+  return (
+    <Flex justify="center" align="center" height="100%">
+      {icons[type.toLowerCase()]}
+    </Flex>
+  );
 };
 
 const boardSize = 8; // 8x8 chess board
